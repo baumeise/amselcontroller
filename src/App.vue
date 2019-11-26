@@ -1,28 +1,51 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <settings-input-text type="text" name="ip" submitValue="Update IP"></settings-input-text>
+    <Controller :direction-value="directionValue" 
+                :speed-value="speedValue" />
+    Direction {{ directionValue }} <br>
+    Speed {{ speedValue }}
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapGetters } from 'vuex'
+import Controller from './components/Controller.vue'
+import SettingsInputText from './components/SettingsInputText.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
-  }
+    Controller,
+    SettingsInputText
+  },
+  computed: {
+    ...mapGetters([
+      'getSpeed',
+      'getDirection'
+    ]),
+    directionValue: function() {
+      let val = this.getDirection;
+      return parseInt(val);
+    },
+    speedValue: function() {
+      let val = this.getSpeed;
+      return parseInt(val);
+    }
+  },
 }
 </script>
 
 <style>
+body {
+  overflow: hidden;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
