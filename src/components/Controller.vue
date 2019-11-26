@@ -61,6 +61,8 @@ export default {
                                 + left + '&r=' 
                                 + right + '&s=' 
                                 + normalisedSpeedValue);
+      // eslint-disable-next-line
+      console.log(response);
     }
   },
   mounted() {
