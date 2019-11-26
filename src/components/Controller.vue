@@ -57,15 +57,10 @@ export default {
       let left = normalisedDirectionValue > 0 ? 1 : 1 + (normalisedDirectionValue / 100);
       let right = normalisedDirectionValue < 0 ? 1 : 1 - (normalisedDirectionValue / 100);
       
-      // eslint-disable-next-line
-      console.log(' l' + left + ' r' + right + ' s' + normalisedSpeedValue);
       let response = await fetch('http://' + this.getIP + '/steer?l=' 
                                 + left + '&r=' 
                                 + right + '&s=' 
                                 + normalisedSpeedValue);
-
-      // eslint-disable-next-line
-      console.log(response);
     }
   },
   mounted() {
