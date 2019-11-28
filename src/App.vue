@@ -1,23 +1,31 @@
 <template>
   <div id="app">
-    <settings-input-text type="text" name="ip" submitValue="Update IP"></settings-input-text>
+    <navigation></navigation>
     <Controller :direction-value="directionValue" 
                 :speed-value="speedValue" />
-    Direction {{ directionValue }} <br>
-    Speed {{ speedValue }}
+    <div class="stats">
+      <div>
+        Direction <br> 
+        {{ directionValue }}
+      </div>
+      <div>
+        Speed <br> 
+        {{ speedValue }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import Controller from './components/Controller.vue'
-import SettingsInputText from './components/SettingsInputText.vue'
+import Navigation from './components/Navigation'
+import Controller from './components/Controller'
 
 export default {
   name: 'app',
   components: {
-    Controller,
-    SettingsInputText
+    Navigation,
+    Controller
   },
   computed: {
     ...mapGetters([
@@ -39,13 +47,25 @@ export default {
 <style>
 body {
   overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
+
+.stats {
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
 </style>

@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    ip: "192.168.4.1",
+    ip: undefined,
+    connectionStatus: undefined,
     speed: 0,
     direction: 0
   },
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     changeDirection (state, payload) {
       state.direction = payload;
+    },
+    changeConnectionStatus (state, payload) {
+      state.connectionStatus = payload;
     }
   },
   getters: {
@@ -29,6 +33,9 @@ export default new Vuex.Store({
     },
     getDirection (state) {
       return state.direction;
+    },
+    getConnectionStatus (state) {
+      return state.connectionStatus;
     }
   }
 });

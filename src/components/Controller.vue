@@ -17,7 +17,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import store from '../store'
 
 export default {
   name: 'controller',
@@ -35,19 +34,19 @@ export default {
   },
   methods: {
     registerEventListeners() {
-      var component = this;
+      var vue = this;
       var direction = document.getElementById('slider-direction');
       var speed = document.getElementById('slider-speed');
 
       direction.oninput = function(event) {
         let value = event.target.value
-        store.commit('changeDirection', value);
-        component.sendControllerData();
+        vue.$store.commit('changeDirection', value);
+        vue.sendControllerData();
       }
       speed.oninput = function(event) {
         let value = event.target.value
-        store.commit('changeSpeed', value);
-        component.sendControllerData();
+        vue.$store.commit('changeSpeed', value);
+        vue.sendControllerData();
       }
     },
     sendControllerData: async function() {
@@ -56,13 +55,16 @@ export default {
       let normalisedDirectionValue = (this.getDirection / 50) * 100;
       let left = normalisedDirectionValue > 0 ? 1 : 1 + (normalisedDirectionValue / 100);
       let right = normalisedDirectionValue < 0 ? 1 : 1 - (normalisedDirectionValue / 100);
-      
-      let response = await fetch('http://' + this.getIP + '/steer?l=' 
+    
+
+      await fetch('http://' + this.getIP + '/steer?l=' 
                                 + left + '&r=' 
                                 + right + '&s=' 
-                                + normalisedSpeedValue);
-      // eslint-disable-next-line
-      console.log(response);
+                                + normalisedSpeedValue)
+      .catch( function (error) {
+        // eslint-disable-next-line
+        console.error(error + '\n\nA M S E L\nMake sure your Amsels address is correct and is reachable within your network.\n\nFor more information visit https://moritzgvt.github.io/amsel/ \n ');
+      })
     }
   },
   mounted() {
